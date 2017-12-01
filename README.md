@@ -15,17 +15,29 @@ Predictive analysis for movie ratings.
 
 **Apache Maven** 3.2.1
 
----
-
 ## Clean and format data
 
-Run the DataETL MapReduce code on input data from [Kaggle TMDB 5000](https://www.kaggle.com/tmdb/tmdb-movie-metadata/data), the output is in [LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/) format. Rename the output file as "tmdb_5000_movies.txt".
+Run the MetadataETL MapReduce code on input data from [Data World IMDB 5000](https://data.world/popculture/imdb-5000-movie-dataset), the output is in [LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/) format. Rename the output file as "tmdb_5000movies.txt".
 
-e.g.
+The features' IDs and their names in LIBSVM output are listed below:
 
-> 6.6	 1:29000000 2:19.237254 3:48902953 4:110 
-
-6.6 is the rating the this movie, the value of 1 is budget of this movie in dollars, value of 2 is the popularity variable of the movie, value of 3 is the revenue of the movie in dollars, value of 4 is the duration of the movie in minutes. Any variable can be empty.
+| Feature_ID | Feature_name                 |
+| ---------- | ---------------------------- |
+| 1          | number of critic for reviews |
+| 2          | duration                     |
+| 3          | director Facebook likes      |
+| 4          | actor 3 Facebook likes       |
+| 5          | actor 1 Facebook likes       |
+| 6          | gross                        |
+| 7          | number of voted users        |
+| 8          | cast total Facebook likes    |
+| 9          | face number in posters       |
+| 10         | number of users for reviews  |
+| 11         | budget                       |
+| 12         | year                         |
+| 13         | actor 2 Facebook likes       |
+| 14         | aspect ratio                 |
+| 15         | movie Facebook likes         |
 
 ## Load data to HDFS
 
@@ -50,4 +62,3 @@ To run the task on Spark, go to folder ./RandomForest/target:
 > spark-submit --class "RandomForestRegression" rbda-movie-1.0-SNAPSHOT.jar
 
 Remember to put the input TXT file in HDFS under 'input' folder
-
