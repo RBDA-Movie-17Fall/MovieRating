@@ -17,9 +17,7 @@
 
 // $example on$
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.spark.ml.Pipeline;
@@ -182,7 +180,7 @@ public class RandomForestRegression {
 
         System.out.println();
 
-        System.out.println("============================RMSE===============================");
+        System.out.println("=============================RMSE===============================");
 
         System.out.println("Root Mean Squared Error (RMSE) on test data = " + rmse);
 
@@ -195,23 +193,6 @@ public class RandomForestRegression {
 
         System.out.println();
         System.out.println("===================THE IMPORTANCE OF FEATURES===================");
-
-//        System.out.println("Number of critic for reviews: " + importances[0]);
-//        System.out.println("Duration: " + importances[1]);
-//        System.out.println("Director Facebook likes: " + importances[2]);
-//        System.out.println("Actor 3 Facebook likes: " + importances[3]);
-//        System.out.println("Actor 1 Facebook likes: " + importances[4]);
-//        System.out.println("Revenue: " + importances[5]);
-//        System.out.println("Number of voted users: " + importances[6]);
-//        System.out.println("Cast total Facebook likes: " + importances[7]);
-//        System.out.println("Face number in posters: " + importances[8]);
-//        System.out.println("Number of users for reviews: " + importances[9]);
-//        System.out.println("Budget: " + importances[10]);
-//        System.out.println("Year: " + importances[11]);
-//        System.out.println("Actor 2 Facebook likes: " + importances[12]);
-//        System.out.println("Aspect ratio: " + importances[13]);
-//        System.out.println("Movie Facebook likes: " + importances[14]);
-//        System.out.println();
 
         Map<Double, String> map = new TreeMap<>();
         map.put(importances[0], "Number of critic for reviews: ");
@@ -229,7 +210,19 @@ public class RandomForestRegression {
         map.put(importances[13], "Aspect ratio: ");
         map.put(importances[14], "Movie Facebook likes: ");
 
-        for(Map.Entry<Double, String> entry: map.entrySet())
+        //print the feature importance in descending order
+        List<Map.Entry<Double,String>> list = new ArrayList<>(map.entrySet());
+
+        Collections.sort(list,new Comparator<Map.Entry<Double,String>>() {
+            @Override
+            public int compare(Map.Entry<Double, String> o1,
+                               Map.Entry<Double, String> o2) {
+                return o2.getKey().compareTo(o1.getKey());
+            }
+
+        });
+
+        for(Map.Entry<Double, String> entry: list)
         {
             System.out.println(entry.getValue() + entry.getKey());
         }
