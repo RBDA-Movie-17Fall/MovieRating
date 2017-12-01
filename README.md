@@ -28,7 +28,7 @@ The features' IDs and their names in LIBSVM output are listed below:
 | 3          | director Facebook likes      |
 | 4          | actor 3 Facebook likes       |
 | 5          | actor 1 Facebook likes       |
-| 6          | gross                        |
+| 6          | revenue                      |
 | 7          | number of voted users        |
 | 8          | cast total Facebook likes    |
 | 9          | face number in posters       |
