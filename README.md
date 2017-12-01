@@ -17,7 +17,7 @@ Predictive analysis for movie ratings.
 
 ---
 
-## Clean and Format Data
+## Clean and format data
 
 Run the DataETL MapReduce code on input data from [Kaggle TMDB 5000](https://www.kaggle.com/tmdb/tmdb-movie-metadata/data), the output is in [LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/) format. Rename the output file as "tmdb_5000_movies.txt".
 
@@ -33,7 +33,7 @@ Go to folder ./RandomForest/input:
 
 ```language=bash
 hdfs dfs -mkdir input
-hdfs dfs -mv tmdb_5000_movies.txt input
+hdfs dfs -put tmdb_5000_movies.txt input
 ```
 
 ## Run random forest regression
