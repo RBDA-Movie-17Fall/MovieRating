@@ -177,6 +177,11 @@ public class RandomForestRegression {
                 .setPredictionCol("prediction")
                 .setMetricName("rmse");
         double rmse = evaluator.evaluate(predictions);
+
+        System.out.println();
+
+        System.out.println("===========================RMSE===============================");
+
         System.out.println("Root Mean Squared Error (RMSE) on test data = " + rmse);
 
         RandomForestRegressionModel rfModel = (RandomForestRegressionModel) (model.stages()[1]);
@@ -185,13 +190,26 @@ public class RandomForestRegression {
 
         //get the variable importance from the model
         double[] importances = rfModel.featureImportances().toArray();
-        System.out.println("===================The importance of each feature===================");
 
-        System.out.println("Budget: " + importances[0]);
-        System.out.println("IMDB popularity: " + importances[1]);
-        System.out.println("Revenue: " + importances[2]);
-        System.out.println("Duration: " + importances[3]);
+        System.out.println();
+        System.out.println("===================THE IMPORTANCE OF FEATURES===================");
 
+        System.out.println("Number of critic for reviews: " + importances[0]);
+        System.out.println("Duration: " + importances[1]);
+        System.out.println("Director Facebook likes: " + importances[2]);
+        System.out.println("Actor 3 Facebook likes: " + importances[3]);
+        System.out.println("Actor 1 Facebook likes: " + importances[4]);
+        System.out.println("Revenue: " + importances[5]);
+        System.out.println("Number of voted users: " + importances[6]);
+        System.out.println("Cast total Facebook likes: " + importances[7]);
+        System.out.println("Face number in posters: " + importances[8]);
+        System.out.println("Number of users for reviews: " + importances[9]);
+        System.out.println("Budget: " + importances[10]);
+        System.out.println("Year: " + importances[11]);
+        System.out.println("Actor 2 Facebook likes: " + importances[12]);
+        System.out.println("Aspect ratio: " + importances[13]);
+        System.out.println("Movie Facebook likes: " + importances[14]);
+        System.out.println();
 
     }
 
