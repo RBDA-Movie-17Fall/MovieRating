@@ -41,7 +41,7 @@ The features' IDs and their names in LIBSVM output are listed below:
 
 ## Load data to HDFS
 
-Go to folder ./RandomForest/input:
+Go to folder ./MetadataETL:
 
 ```language=bash
 hdfs dfs -mkdir input
