@@ -19,7 +19,9 @@
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.spark.ml.Pipeline;
 import org.apache.spark.ml.PipelineModel;
 import org.apache.spark.ml.PipelineStage;
@@ -180,7 +182,7 @@ public class RandomForestRegression {
 
         System.out.println();
 
-        System.out.println("===========================RMSE===============================");
+        System.out.println("============================RMSE===============================");
 
         System.out.println("Root Mean Squared Error (RMSE) on test data = " + rmse);
 
@@ -194,21 +196,44 @@ public class RandomForestRegression {
         System.out.println();
         System.out.println("===================THE IMPORTANCE OF FEATURES===================");
 
-        System.out.println("Number of critic for reviews: " + importances[0]);
-        System.out.println("Duration: " + importances[1]);
-        System.out.println("Director Facebook likes: " + importances[2]);
-        System.out.println("Actor 3 Facebook likes: " + importances[3]);
-        System.out.println("Actor 1 Facebook likes: " + importances[4]);
-        System.out.println("Revenue: " + importances[5]);
-        System.out.println("Number of voted users: " + importances[6]);
-        System.out.println("Cast total Facebook likes: " + importances[7]);
-        System.out.println("Face number in posters: " + importances[8]);
-        System.out.println("Number of users for reviews: " + importances[9]);
-        System.out.println("Budget: " + importances[10]);
-        System.out.println("Year: " + importances[11]);
-        System.out.println("Actor 2 Facebook likes: " + importances[12]);
-        System.out.println("Aspect ratio: " + importances[13]);
-        System.out.println("Movie Facebook likes: " + importances[14]);
+//        System.out.println("Number of critic for reviews: " + importances[0]);
+//        System.out.println("Duration: " + importances[1]);
+//        System.out.println("Director Facebook likes: " + importances[2]);
+//        System.out.println("Actor 3 Facebook likes: " + importances[3]);
+//        System.out.println("Actor 1 Facebook likes: " + importances[4]);
+//        System.out.println("Revenue: " + importances[5]);
+//        System.out.println("Number of voted users: " + importances[6]);
+//        System.out.println("Cast total Facebook likes: " + importances[7]);
+//        System.out.println("Face number in posters: " + importances[8]);
+//        System.out.println("Number of users for reviews: " + importances[9]);
+//        System.out.println("Budget: " + importances[10]);
+//        System.out.println("Year: " + importances[11]);
+//        System.out.println("Actor 2 Facebook likes: " + importances[12]);
+//        System.out.println("Aspect ratio: " + importances[13]);
+//        System.out.println("Movie Facebook likes: " + importances[14]);
+//        System.out.println();
+
+        Map<Double, String> map = new TreeMap<>();
+        map.put(importances[0], "Number of critic for reviews: ");
+        map.put(importances[1], "Duration: ");
+        map.put(importances[2], "Director Facebook likes: ");
+        map.put(importances[3], "Actor 3 Facebook likes: ");
+        map.put(importances[4], "Actor 1 Facebook likes: ");
+        map.put(importances[5], "Revenue: ");
+        map.put(importances[7], "Cast total Facebook likes: ");
+        map.put(importances[8], "Face number in posters: ");
+        map.put(importances[9], "Number of users for reviews: ");
+        map.put(importances[10], "Budget: ");
+        map.put(importances[11], "Year: ");
+        map.put(importances[12], "Actor 2 Facebook likes: ");
+        map.put(importances[13], "Aspect ratio: ");
+        map.put(importances[14], "Movie Facebook likes: ");
+
+        for(Map.Entry<Double, String> entry: map.entrySet())
+        {
+            System.out.println(entry.getValue() + entry.getKey());
+        }
+
         System.out.println();
 
     }
