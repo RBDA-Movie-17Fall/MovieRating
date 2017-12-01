@@ -59,7 +59,7 @@ public class RandomForestRegression {
         JavaSparkContext jsc = new JavaSparkContext(sparkConf);
 
         // Load and parse the data file.
-        String datapath = "./input/tmdb_5000_movies.txt";
+        String datapath = "./input/imdb_5000.txt";
 
         JavaRDD<LabeledPoint> data = MLUtils.loadLibSVMFile(jsc.sc(), datapath).toJavaRDD();
 
@@ -138,7 +138,7 @@ public class RandomForestRegression {
         SQLContext sqlContext = new SQLContext(jsc);
 
         // Load and parse the data file, converting it to a DataFrame.
-        DataFrame data = sqlContext.read().format("libsvm").load("./input/tmdb_5000_movies.txt");
+        DataFrame data = sqlContext.read().format("libsvm").load("./input/imdb_5000.txt");
 
         // Automatically identify categorical features, and index them.
         // Set maxCategories so features with > 4 distinct values are treated as continuous.
