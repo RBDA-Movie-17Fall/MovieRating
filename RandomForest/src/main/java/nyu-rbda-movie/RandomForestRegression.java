@@ -52,7 +52,7 @@ import org.apache.spark.sql.SQLContext;
 
 public class RandomForestRegression {
 
-    public void randomForestModelTest() {
+    public void randomForestModelTest(int numTrees) {
         // $example on$
         //run in self-contained mode
         SparkConf sparkConf = new SparkConf().setAppName("JavaRandomForestRegressionExample").setMaster("local[*]");
@@ -71,7 +71,9 @@ public class RandomForestRegression {
         // Set parameters.
         // Empty categoricalFeaturesInfo indicates all features are continuous.
         Map<Integer, Integer> categoricalFeaturesInfo = new HashMap<>();
-        int numTrees = 5000; // Use more in practice.
+
+        //int numTrees = 5000; // Use more in practice.
+
         String featureSubsetStrategy = "auto"; // Let the algorithm choose.
         String impurity = "variance";
         int maxDepth = 4;
@@ -175,7 +177,7 @@ public class RandomForestRegression {
 
         RandomForestRegressionModel rfModel = (RandomForestRegressionModel) (model.stages()[1]);
 
-        System.out.println("Learned regression forest model:\n" + rfModel.toDebugString());
+        //System.out.println("Learned regression forest model:\n" + rfModel.toDebugString());
 
         //get the variable importance from the model
         double[] importances = rfModel.featureImportances().toArray();
@@ -218,6 +220,8 @@ public class RandomForestRegression {
 
         System.out.println();
 
+        System.out.println("============================PREDICTION==============================");
+
         //predict the rating of "Justice League"
         double numCritics = 366; //Metascore critics
         double duration = 120;
@@ -243,12 +247,38 @@ public class RandomForestRegression {
 
         System.out.println("The predictive rating of \"Justice League\" is " + rfModel.predict(justiceLeague));
 
+        System.out.println();
+
+        System.out.println("===================================================================");
     }
 
     public static void main(String[] args) {
 
         RandomForestRegression test = new RandomForestRegression();
-        test.randomForestRegressionModel();
+        Scanner sc = new Scanner(System.in);
+
+        while(true)
+        {
+            System.out.println("Show me what you got(1 - RMSE, 2 - Feature Importance & Justice League): ");
+            System.out.print(">> ");
+            int i = sc.nextInt();
+
+            if(i == 1)
+            {
+                System.out.println("Number of trees in the random forest: ");
+                System.out.print(">> ");
+                int numTrees = sc.nextInt();
+                test.randomForestModelTest(numTrees);
+            }
+            else if(i == 2)
+            {
+                test.randomForestRegressionModel();
+            }
+            else
+                break;
+        }
+
+        sc.close();;
 
     }
 }
