@@ -221,7 +221,7 @@ public class RandomForestRegression implements Serializable{
 
         System.out.println();
 
-        System.out.println("============================PREDICTION==============================");
+        System.out.println("============================PREDICTION=========================");
 
         //predict the rating of "Justice League"
         double numCritics = 366; //Metascore critics
@@ -250,7 +250,7 @@ public class RandomForestRegression implements Serializable{
 
         System.out.println();
 
-        System.out.println("===================================================================");
+        System.out.println("================================================================");
     }
 
     public static void main(String[] args) {
