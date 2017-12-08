@@ -33,6 +33,7 @@ import org.apache.spark.mllib.linalg.Vector;
 import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.tree.model.DecisionTreeModel;
 import org.apache.spark.sql.DataFrame;
+import scala.Serializable;
 import scala.Tuple2;
 
 import org.apache.spark.api.java.function.Function2;
@@ -50,7 +51,7 @@ import org.apache.spark.sql.SQLContext;
 
 // $example off$
 
-public class RandomForestRegression {
+public class RandomForestRegression implements Serializable{
 
     public void randomForestModelTest(int numTrees) {
         // $example on$
