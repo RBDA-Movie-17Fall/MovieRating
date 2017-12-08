@@ -176,9 +176,10 @@ public class RandomForestRegression implements Serializable{
 
         System.out.println("Root Mean Squared Error (RMSE) on test data = " + rmse);
 
+        System.out.println("===================Random Forest Generated======================");
         RandomForestRegressionModel rfModel = (RandomForestRegressionModel) (model.stages()[1]);
 
-        //System.out.println("Learned regression forest model:\n" + rfModel.toDebugString());
+        System.out.println("Learned regression forest model:\n" + rfModel.toString());
 
         //get the variable importance from the model
         double[] importances = rfModel.featureImportances().toArray();
@@ -221,7 +222,7 @@ public class RandomForestRegression implements Serializable{
 
         System.out.println();
 
-        System.out.println("============================PREDICTION=========================");
+        System.out.println("============================PREDICTION==========================");
 
         //predict the rating of "Justice League"
         double numCritics = 366; //Metascore critics
