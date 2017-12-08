@@ -64,7 +64,7 @@ public class RandomForestRegression {
         JavaRDD<LabeledPoint> data = MLUtils.loadLibSVMFile(jsc.sc(), datapath).toJavaRDD();
 
         // Split the data into training and test sets (20% held out for testing)
-        JavaRDD<LabeledPoint>[] splits = data.randomSplit(new double[]{0.8, 0.2});
+        JavaRDD<LabeledPoint>[] splits = data.randomSplit(new double[]{0.7, 0.3});
         JavaRDD<LabeledPoint> trainingData = splits[0];
         JavaRDD<LabeledPoint> testData = splits[1];
 
@@ -107,26 +107,15 @@ public class RandomForestRegression {
 
         //System.out.println("Learned regression forest model:\n" + model.toDebugString());
 
-        System.out.println("Summary of the model: " + model.toString());
-
-        //get the variable imprtance
-
-
         //get all the decision trees from the model
         DecisionTreeModel[] trees = model.trees();
         System.out.println("The first decision tree in the forest: " + trees[0].toDebugString());
-
-        //create a movie vector and use model to predict the rating
-        Vector windRiver = Vectors.dense(11000000, 21, 40100000, 111);
-
-        System.out.println("Predictive rating of <Wind River>: " + model.predict(windRiver));
 
         // Save and load
         model.save(jsc.sc(), "target/tmp/myRandomForestRegressionModel");
         RandomForestModel sameModel = RandomForestModel.load(jsc.sc(),
                 "target/tmp/myRandomForestRegressionModel");
         // $example off$
-
 
         jsc.stop();
     }
@@ -186,7 +175,7 @@ public class RandomForestRegression {
 
         RandomForestRegressionModel rfModel = (RandomForestRegressionModel) (model.stages()[1]);
 
-        System.out.println("Learned regression forest model:\n" + rfModel.toString());
+        System.out.println("Learned regression forest model:\n" + rfModel.toDebugString());
 
         //get the variable importance from the model
         double[] importances = rfModel.featureImportances().toArray();
@@ -228,6 +217,31 @@ public class RandomForestRegression {
         }
 
         System.out.println();
+
+        //predict the rating of "Justice League"
+        double numCritics = 366; //Metascore critics
+        double duration = 120;
+        double directorLikes = 0;
+        double act3Likes = 0;
+        double act1Likes = 0;
+        double revenue = 573000000;
+        double numVoters = 129274;
+        double castTotalLikes = 0;
+        double faceNumPoster = 5;
+        double numberReviewUsers = 1051;
+        double budget = 300000000;
+        double year = 2017;
+        double act2Likes = 0;
+        double aspectRatio = 1.85;
+        double movieLikes = 0;
+
+        int size = 15;
+        int[] indices = new int[]{0,1,5,6,8,9,10,11,13};
+        double[] values = new double[]{numCritics, duration, revenue, numVoters, faceNumPoster,
+                                        numberReviewUsers, budget, year, aspectRatio};
+        Vector justiceLeague = Vectors.sparse(size, indices, values);
+
+        System.out.println("The predictive rating of \"Justice League\" is " + rfModel.predict(justiceLeague));
 
     }
 
